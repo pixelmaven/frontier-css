@@ -1,0 +1,28 @@
+
+
+//
+//	Frontier / Functions / Units
+//
+
+
+/*
+ *	EM -> PX Conversion
+ *	--------------------------------------------------
+ */
+
+@function em( $target, $context: default ) {
+	@if type-of( $context ) == string {
+		$context: get-font-size( $context );
+	}
+	@return ( $target / $context ) * 1em;
+}
+
+
+/*
+ *	Unitless
+ *	--------------------------------------------------
+ */
+
+@function no-unit( $number ) {
+	@return $number / ( $number * 0 + 1 );
+}

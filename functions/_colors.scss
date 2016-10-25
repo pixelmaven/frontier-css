@@ -1,0 +1,18 @@
+
+
+//
+//	Frontier / Functions / Colors
+//
+
+
+/*
+ *	Colours
+ *	--------------------------------------------------
+ */
+
+
+
+//	Return color (HEX) from color map by name.
+@function get-color( $name, $map: $colors ) {
+	@return get( $name, $map );
+}

@@ -1,0 +1,53 @@
+
+
+//
+//	Frontier / Functions / Typesetting
+//
+
+
+/*
+ *	Font sizing
+ *	--------------------------------------------------
+ */
+
+//	Return font size in PX from type-scale NAME.
+@function get-font-size( $name, $map: $type-scale ) {
+	@return get( '#{$name}.px', $map );
+}
+
+//	Return font line-height in LINES from type-scale NAME.
+@function get-font-lines( $name, $map: $type-scale ) {
+	@return get( '#{$name}.lines', $map );
+}
+
+@function get-font-margin( $name, $map: $type-scale ) {
+	@return get( '#{$name}.margin', $map );
+}
+
+@function get-font-cap( $name, $map: $type-scale ) {
+	@return get( '#{$name}.cap', $map );
+}
+
+@function font-scale-px( $name, $context: default ) {
+	$font-size: if( type-of( $name ) == number, $name, get-font-size( $name ) );
+	$context-size: if( type-of( $context ) == number, $context, get-font-size( $context ) );
+	@return $font-size / $context-size;
+}
+
+//	Return font size in EMs with optional context NAME / PX.
+@function font-scale( $name, $context: default ) {
+	@return font-scale-px( $name, $context ) * 1em;
+}
+
+
+/*
+ *	Baseline spacing
+ *	--------------------------------------------------
+ */
+
+@function lines( $lines: 1, $context: default ) {
+	@if type-of( $context ) == string {
+		$context: get-font-size( $context );
+	}
+	@return $lines * ( get( line-height, $type-settings ) / $context ) * 1em;
+}

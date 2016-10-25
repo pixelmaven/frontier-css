@@ -1,0 +1,111 @@
+
+
+//
+//  Frontier / Helpers / Media Queries
+//
+
+
+/*
+ *	Breakpoint Display
+ *	--------------------------------------------------
+ */
+
+$grid-color-horizontal: rgba(grey, 0.1);
+$grid-color-vertical: rgba(red, 0.1);
+
+
+.-helper-show-baseline {
+	background: linear-gradient($grid-color-horizontal lines(1), transparent lines(1));
+	background-size: cols($breakpoint-columns) lines(2);
+	background-position: center top;
+}
+
+.outline-main {
+
+	@if $ENV == "dev" {
+		position: relative;
+
+		.helper-grid {
+			width: 100%; height: 100%;
+			position: absolute; top: 0; left: 0; z-index: 0;
+
+			.container {
+				height: 100%;
+				padding: 0 gutters(0.5);
+
+				&:after {
+					content: '';
+					width: 100%; height: 100%;
+					background: linear-gradient(90deg, $grid-color-vertical 0, transparent 1px),
+						linear-gradient(90deg, transparent calc( 100% - #{gutters(1)} - 1px ), $grid-color-vertical calc( 100% - #{gutters(1)} ), transparent calc( 100% - #{gutters(1)}) );
+					background-size: cols-fluid(1) 1px;
+					background-position: gutters(0.5) 0%;
+				}
+				
+				@each $bp, $media in $breakpoints {
+					@include breakpoint($bp) {
+
+						&:after {
+							background: linear-gradient(90deg, $grid-color-vertical 0, transparent 1px),
+								linear-gradient(90deg, transparent calc( 100% - #{gutters(1)} - 1px ), $grid-color-vertical calc( 100% - #{gutters(1)} ), transparent calc( 100% - #{gutters(1)}) );
+							background-size: cols-fluid(1) 1px;
+							background-position: gutters(0.5) 0%;
+
+							// Disable for IE
+							background: -ms-linear-gradient( 90deg, transparent 0, transparent 100%);
+						}
+					}
+				}
+			}
+		}
+
+	}
+}
+
+// linear-gradient(rgba(0, 0, 0, 0.05) 0.01rem, transparent 0.09rem), linear-gradient(90deg, rgba(255, 0, 0, 0.25) 0, transparent 0.25%), linear-gradient(90deg, transparent 50%, rgba(255, 0, 0, 0.25) 50%, transparent 50.25%)
+
+body {
+	
+	@if $ENV == "dev" {
+
+		//	breakpoint-helper
+		&:before {
+			padding: 0.5em 0.75em;
+			position: fixed; bottom: 0; right: 0; z-index: 9999;
+			font-family: monospace; font-size: 1.125em;
+			line-height: 1; color: #20D832;
+			background: rgba(0,0,0,0.8);
+		}
+	}
+
+	@each $bp, $bp-map in $breakpoints {
+		@include breakpoint($bp) {
+			
+			@if $ENV == "dev" {
+
+				// $bp-map: get( $breakpoint, $map );
+
+				$bp-direction: #{get( direction, $bp-map )}-width;
+				$bp-width: get( width, $bp-map );
+				$bp-scale: get( scale, $bp-map );	
+				$bp-cols: get( $bp, get( breakpoint-columns, $grid ) );
+
+				//	breakpoint-helper
+				&:before {
+					@if $bp == default {
+						content: "#{$bp} / #{$bp-cols} cols";
+					} @else {
+						content: "#{$bp} / #{$bp-direction} #{$bp-width}px / #{$bp-cols} cols";
+					}
+				}
+			}
+
+			// 	This is for the JS to identify current breakpoint, tied to JS.
+			&:after {
+				content: "#{$bp}";
+				display: none;
+			}
+
+		}
+	}
+}

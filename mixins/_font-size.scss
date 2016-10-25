@@ -1,0 +1,105 @@
+
+
+//
+//	Frontier / Mixins / Font Size
+//
+
+
+/*
+ *	Font Size
+ *	--------------------------------------------------
+ */
+
+$show-guides: false;
+
+//	Set font-size and line-height from type-scale NAME or PX, optional LINES override.
+@mixin font-size( $font-size: default, $lines: null, $has-margins: true, $margin-lines: null, $cap-height: null ) {
+	
+	// Set by type-scale name
+	@if type-of( $font-size ) == string {
+		$lines: if( $lines == null, get-font-lines( $font-size ), $lines );
+		$cap-height: if( $cap-height == null, get-font-cap( $font-size ), $cap-height );
+		$margin-lines: if( $margin-lines == null, get-font-margin( $font-size ), $margin-lines );
+		$font-size: get-font-size( $font-size );
+	}
+
+	$lines: if( $lines == null, 2, $lines );
+	$cap-height: if( $cap-height == null, 0.6, $cap-height );
+	$margin-lines: if( $margin-lines == null, 3, $margin-lines );
+	
+	// @debug $font-size $lines $cap-height $margin-lines;
+
+	$lh-px: get( line-height, $type-settings );
+	$lh-px-total: $lh-px * $lines;
+	$lh-em: $lh-px / $font-size;
+	$lh-em-total: $lh-em * $lines;
+	$offset-px: round(($lh-px-total - ($font-size * $cap-height)) / 2);
+	$offset-adjust: 0;
+
+	font-size: em( $font-size );
+	max-width: cols( 8, $font-size );
+	line-height: $lh-em-total * 1em;
+	position: relative;
+
+	@if $has-margins == true {
+		
+		@if $offset-px < ($lh-px * 0.5) {
+			$offset-adjust: $lh-px;
+		}
+		@if $offset-px >= ($lh-px * 1) {
+			$offset-adjust: -$lh-px;
+		}
+
+		margin: ( $offset-px + $offset-adjust ) / $font-size * 1em 0 $lh-em * -1em;
+		padding-bottom: (( $lh-px * ($margin-lines + 1) ) - $offset-px - $offset-adjust ) / $font-size * 1em;
+
+		@if $show-guides == true {
+			&:before {
+				content: '';
+				width: 100%; height: $lh-em * 1em;
+				position: absolute; bottom: 0; left: 0;
+				background-color: rgba(blue, 0.2);
+			}
+
+			&:after {
+				content: '';
+				width: 100%; height: $lh-em * 3em;
+				position: absolute; bottom: 0; left: 0;
+				background-color: rgba(red, 0.2);
+			}
+		}
+
+		&.-margin-small {
+			padding-bottom: (( $lh-px * ($margin-lines - 1)) - $offset-px - $offset-adjust ) / $font-size * 1em;
+		}
+
+		&.-margin-none {
+			padding-bottom: ( $lh-px - $offset-px - $offset-adjust ) / $font-size * 1em;
+
+			&:after {
+				height: 0;
+			}
+		}
+
+	} @else {
+		margin: ( $offset-px + $offset-adjust ) / $font-size * 1em 0 $lh-em * -1em;
+		padding-bottom: ( $lh-px - $offset-px - $offset-adjust ) / $font-size * 1em;
+	}
+}
+
+
+// @mixin generate-type-scale( $options: () ) {
+// 	$configuration: extend((
+// 		size: 16,
+// 	), $options);
+
+// 	.#{$scale} {
+// 		@include font-size( $size, $lines );
+// 	}
+	
+// 	@if $element != "" {
+// 		#{$element} { 
+// 			@extend .#{$scale}; 
+// 		}
+// 	}
+// }

@@ -1,0 +1,86 @@
+
+
+//
+//	Frontier / Base / Code
+//
+
+
+/**
+ *	Core
+ *	--------------------------------------------------
+ */
+
+
+code,
+pre {
+	margin: 0;
+	box-sizing: border-box;
+	font-family: Monaco, Consolas, 'Lucida Console', monospace;
+	color: get( brand-blue, $colors );
+}
+
+/**
+ * @module Code Block [pre]
+ * @description Display a block of code
+ *
+ * @modifier [.pre__scrollable] Gives max height so that block is scrollable
+ *
+ * @markup
+		<pre><code>
+			var foo = "Hello";<br/>
+			var bar = " World!";<br/>
+			console.log(foo + bar);
+		</code></pre>
+ */
+pre {
+	display: block; 
+	word-break: break-all;
+	word-wrap: break-word;
+	white-space: pre;
+	white-space: pre-wrap;
+
+	// Enable scrollable blocks of code
+	&.pre__scrollable {
+		max-height: 340px;
+		overflow-y: scroll;
+	}
+
+	// Account for some code outputs that place code tags in pre tags
+	code {
+		margin: 0; padding: 0;
+		color: inherit;
+		display: block;
+		white-space: pre;
+		white-space: pre-wrap;
+		background-color: transparent;
+		border: 0;
+	}
+}
+
+
+/**
+ * @module Inline Code [code]
+ * @description Display inline code
+ *
+ * @markup
+		<code>console.log('Hello World!');</code>
+ */
+code {
+	@include font-size( 12, 2 );
+	max-width: none;
+	// margin: -1px 0;
+	// border: 1px solid get( grey, $colors );
+	// white-space: nowrap;
+}
+
+
+.ui-code {
+	margin: -1px 0; padding: lines(1) gutters(0.5) lines(2);
+	border: 1px solid get( grey, $colors );
+
+	h5 {
+		@include font-size( 13, 2, true, 2 );
+		font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+		color: get( grey, $colors );
+	}
+}

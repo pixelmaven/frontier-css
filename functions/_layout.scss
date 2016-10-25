@@ -1,0 +1,53 @@
+
+
+//
+//	Frontier / Functions / Layout
+//
+
+
+/*
+ *	Columns
+ *	--------------------------------------------------
+ */
+
+@function cols( $columns: 1, $context: default ) {
+	$col-w: get( column-width, $grid );
+	$gutter-w: get( gutter-width, $grid );
+
+	@if type-of( $context ) == string {
+		$context: get-font-size( $context );
+	}
+	@return ( $columns * ( $col-w + $gutter-w ) - $gutter-w ) / $context * 1em;
+}
+
+@function cols-fluid( $columns: 1, $bp-cols: $breakpoint-columns ) {
+	@return $columns * ( 100% / $bp-cols );
+}
+
+
+/*
+ *	Gutter size
+ *	--------------------------------------------------
+ */
+
+@function gutters( $gutters: 1, $context: default ) {
+	$gutter-w: get( gutter-width, $grid );
+
+	@if type-of( $context ) == string {
+		$context: get-font-size( $context );
+	}
+	@return $gutters * ( $gutter-w / $context ) * 1em;
+}
+
+
+/*
+ *	Segment spacing
+ *	--------------------------------------------------
+ */
+
+@function segments( $segments: 1, $context: default ) {
+	@if type-of( $context ) == string {
+		$context: get-font-size( $context );
+	}
+	@return $segments * (( get( line-height, $type-settings ) * get( segment-size, $type-settings )) / $context ) * 1em;
+}

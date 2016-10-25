@@ -1,0 +1,16 @@
+
+
+//
+//	Frontier / Base / Tables
+//
+
+
+table {
+	width: 100%;
+}
+	th,
+	td {
+		// @extend .default;
+		padding: lines(1) 0;
+		text-align: left;
+	}

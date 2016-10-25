@@ -1,0 +1,53 @@
+
+
+//
+//	Frontier / UI / Typography
+//
+
+
+/*
+ *	Font Sizes
+ *	--------------------------------------------------
+ */
+
+// .default { @include font-size( 14, 3, true, 2, 0.7 ); }
+
+// .alpha { @include font-size( 24, 4, true, 2, 0.75 ); }
+// .bravo { @include font-size( 18, 3, true, 2, 0.7 ); }
+// .charlie { @include font-size( 18, 3, true, 2, 0.75 ); }
+// .delta { @include font-size( 16, 3, true, 2, 0.75 ); }
+// .echo { @include font-size( 16, 3, true, 2, 0.75 ); }
+// .foxtrot { @include font-size( 14, 3, true, 2, 0.65 ); }
+
+// .golf { @include font-size( 12, 3, true, 2, 0.65 ); }
+
+@each $scale, $data in $type-scale {
+	
+	$px: 		if( map-has-key( $data, 'px' ), get( px, $data ), 16 );
+	$lines: 	if( map-has-key( $data, 'lines' ), get( lines, $data ), 1 );
+	$cap-size: 	if( map-has-key( $data, 'cap' ), get( cap, $data ), 1 );
+	$element: 	if( map-has-key( $data, 'map-to' ), get( map-to, $data ), false );
+
+	.#{$scale} {
+		@include font-size( $scale );
+	}
+
+	@if type-of($element) == string {
+		#{$element} { 
+			@extend .#{$scale}; 
+		}
+	}
+
+}
+
+
+/*
+ *	Breakpoint:	Tablet
+ *	--------------------------------------------------
+ */
+
+@include breakpoint(tablet) {
+
+	
+	
+}

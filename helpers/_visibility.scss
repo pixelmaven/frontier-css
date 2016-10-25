@@ -1,0 +1,37 @@
+
+
+//
+//	Frontier / Helpers / Visibility
+//
+
+
+.-hide-mobile {
+	display: none;
+}
+.-hide-desktop {
+	display: inherit;
+}
+
+
+
+/*
+ * 	Media Queries
+ *	--------------------------------------------------
+ */
+
+/*
+ *	tablet
+ *	--------------------------------------------------
+ */
+
+@include breakpoint(tablet) {
+	
+	.-hide-mobile {
+		display: inherit;
+	}
+	.-hide-desktop {
+		display: none;
+	}
+
+
+}

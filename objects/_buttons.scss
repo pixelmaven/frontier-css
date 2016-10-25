@@ -1,0 +1,84 @@
+
+
+//
+//	Frontier / UI / Buttons
+//
+
+
+.o-btn {
+	@include font-size( zeta, 2, false );
+	margin: 0; padding: lines( 2, zeta ) gutters( 0.75, zeta ); box-sizing: border-box;
+	display: inline-block; position: relative;
+	color: get( white, $colors );
+	text-align: center; text-decoration: none;
+	background-color: $button-color;
+	border: none; border-radius: 0;
+	transition: color 0.2s, background-color 0.2s, opacity 0.2s;
+
+	&:hover {
+		color: get( white, $colors );
+		background-color: $button-color;
+	}
+
+
+	// Formats
+
+	&.-format-block {
+		width: 100%;
+	}
+
+	// Sizes
+
+	&.-size-large {
+		padding-top: lines( 3, zeta );
+		padding-bottom: lines( 3, zeta );
+	}
+
+	// States
+
+	&.-is-success {
+		color: $button-color;
+		border-color: #B8E986;
+		background-color: #B8E986;
+	} 
+
+	&.-is-error {
+		color: $button-color;
+		border-color: #FF696C;
+		background-color: #FF696C;
+	}
+
+	&.-is-disabled {
+		pointer-events: none;
+		background-color: get-color( grey );
+	}
+
+	//	Themes
+	//	--------------------------------------------------
+
+	.-theme-dark & {
+		color: get-color( brand-alt ); font-weight: normal;
+		background-color: get-color( white );
+	}
+
+
+}
+
+
+
+/**
+ * 	Media Queries
+ *	--------------------------------------------------
+ */
+
+
+//	Breakpoint:	tablet-wide 
+//	--------------------------------------------------
+
+@include breakpoint( tablet-wide ) {
+
+	.o-btn {
+
+	}
+
+}

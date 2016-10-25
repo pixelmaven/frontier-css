@@ -1,0 +1,209 @@
+
+
+//
+//	Frontier / Defaults
+//
+
+
+$frontier-settings-defaults: (
+	
+);
+
+/*
+ *	Colours
+ *	--------------------------------------------------
+ */
+
+$colors-defaults: (
+	//	Base Palette
+	white:					#fff,
+	grey:					#dadcde,
+		grey-light:			#f4f4f4,
+		grey-med:			#666,
+		grey-dark:			#333,
+	black:					#000,				
+	
+	// 	Brand Palette
+	base: 					#33404d,
+	brand: 					#f26d21,
+		brand-dark: 		#c9510c,
+);
+
+$colors: () !default;
+$colors: extend( $colors-defaults, $colors );
+
+//	Colour Vars
+$color-primary:			get( brand, $colors ) !default;
+$color-secondary:		get( base, $colors ) !default;
+
+//	Colour Settings
+$text-color:			get( grey-med, $colors ) !default;
+$link-color:			get( brand, $colors ) !default;
+$link-color-hover:		get( brand-dark, $colors ) !default;
+$headings-color:		$color-secondary !default;
+$button-color:			$color-primary !default;
+$button-color-text:		$color-secondary !default;
+$background-color:		transparent !default;
+
+$theme-colors: (
+	brand: ( default: get( brand, $colors ), dark: get( brand-dark, $colors ) )
+);
+
+
+/*
+ *	Typography
+ *	--------------------------------------------------
+ */
+
+$type-settings-defaults: (
+	line-height:			8,	// px
+	segment-size:			8,	// lines
+
+	field-input-size: 		epsilon,
+	field-label-size: 		eta
+);
+
+$type-scale-defaults: (
+	/*	title: 	( size (px), lines(baseline), margins(baseline), cap-height(ratio), map to tag ) */
+	default: 	( px: 16, lines: 3, margin: 2, cap: 0.75, map-to: h5 ),
+
+	alpha:		( px: 54, lines: 8, margin: 2, cap: 0.75, map-to: h1 ),
+	beta: 		( px: 48, lines: 6, margin: 2, cap: 0.8, map-to: h2 ),
+	gamma: 		( px: 36, lines: 6, margin: 2, cap: 0.75, map-to: h3 ),
+	delta: 		( px: 24, lines: 4, margin: 3, cap: 0.75, map-to: h4 ),
+	epsilon: 	( px: 18, lines: 3, margin: 3, cap: 0.75 ),
+	
+	zeta: 		( px: 14, lines: 3, margin: 3, cap: 0.6 ),
+	eta: 		( px: 12, lines: 2, map-to: h6 ),
+	theta: 		( px: 11, lines: 2 ),
+	india: 		( px: 9, lines: 1.5 )
+);
+
+$type-scale: () !default;
+$type-scale: extend( $type-scale-defaults, $type-scale );
+
+//	Font Vars
+$font-primary:			"Open Sans", Arial, sans-serif !default;
+$font-secondary:		"Graphik", Arial, sans-serif !default;
+
+//	Font Settings
+$body-font:				$font-primary !default;
+$headings-font:			$font-secondary !default;
+$button-font:			$font-secondary !default;
+
+
+/*
+ *	Grid
+ *	--------------------------------------------------
+ */
+
+$grid-defaults: (
+	column-width:			72, /* The column-width of your grid in pixels */
+	gutter-width:			32, /* The gutter-width of your grid in pixels */
+
+	breakpoint-columns: (
+		default:			4,
+
+		smartphone: 		4,
+		smartphone-wide:	4,
+		tablet:				8,
+		tablet-wide: 		10,
+
+		desktop: 			12,
+		med-desktop: 		12,
+		large-desktop: 		12
+	)
+);
+
+$grid: () !default;
+$grid: extend( $grid-defaults, $grid );
+
+//	Font Vars
+$column-em: get( column-width, $grid ) / get( 'default.px', $type-scale ) * 1em;
+$gutter-em: get( gutter-width, $grid ) / get( 'default.px', $type-scale ) * 1em;
+
+
+/*
+ *	Breakpoints
+ *	--------------------------------------------------
+ */
+
+$breakpoints-defaults: (
+/*	title: 				(mq pixels columns) */
+	default:			( direction: min, width: 320, scale: 0 ),
+
+	smartphone: 		( direction: min, width: 480, scale: 0 ),
+	smartphone-wide:	( direction: min, width: 640, scale: 0 ),
+	tablet:				( direction: min, width: 768, scale: 0 ),
+	tablet-wide: 		( direction: min, width: 1024, scale: 0 ),
+
+	desktop: 			( direction: min, width: 1366, scale: 0 ),
+	med-desktop: 		( direction: min, width: 1680, scale: 0 ),
+	large-desktop: 		( direction: min, width: 1920, scale: 0 )
+);
+
+
+/*
+ *	Easings
+ *	--------------------------------------------------
+ */
+
+$easings-defaults: (
+	linear:				cubic-bezier(0.250, 0.250, 0.750, 0.750),
+	
+	ease-in:			cubic-bezier(0.420, 0.000, 1.000, 1.000),
+	ease-out:			cubic-bezier(0.000, 0.000, 0.580, 1.000),
+	ease-in-out:		cubic-bezier(0.420, 0.000, 0.580, 1.000),
+
+	quad-in:			cubic-bezier(0.550, 0.085, 0.680, 0.530),
+	quad-out:			cubic-bezier(0.250, 0.460, 0.450, 0.940),
+	quad-in-out:		cubic-bezier(0.455, 0.030, 0.515, 0.955),
+
+	cubic-in:			cubic-bezier(0.550, 0.055, 0.675, 0.190),
+	cubic-out:			cubic-bezier(0.215, 0.610, 0.355, 1.000),
+	cubic-in-out:		cubic-bezier(0.645, 0.045, 0.355, 1.000),
+
+	quart-in:			cubic-bezier(0.895, 0.030, 0.685, 0.220),
+	quart-out:			cubic-bezier(0.165, 0.840, 0.440, 1.000),
+	quart-in-out:		cubic-bezier(0.770, 0.000, 0.175, 1.000),
+
+	quint-in:			cubic-bezier(0.755, 0.050, 0.855, 0.060),
+	quint-out:			cubic-bezier(0.230, 1.000, 0.320, 1.000),
+	quint-in-out:		cubic-bezier(0.860, 0.000, 0.070, 1.000),
+	
+	sine-in:			cubic-bezier(0.470, 0.000, 0.745, 0.715),
+	sine-out:			cubic-bezier(0.390, 0.575, 0.565, 1.000),
+	sine-in-out:		cubic-bezier(0.445, 0.050, 0.550, 0.950),
+	
+	expo-in:			cubic-bezier(0.950, 0.050, 0.795, 0.035),
+	expo-out:			cubic-bezier(0.190, 1.000, 0.220, 1.000),
+	expo-in-out:		cubic-bezier(1.000, 0.000, 0.000, 1.000),
+	
+	circ-in:			cubic-bezier(0.600, 0.040, 0.980, 0.335),
+	circ-out:			cubic-bezier(0.075, 0.820, 0.165, 1.000),
+	circ-in-out:		cubic-bezier(0.785, 0.135, 0.150, 0.860),
+);
+
+
+/*
+ *	Animations
+ *	--------------------------------------------------
+ */
+
+
+/*
+ *	Settings Defaults
+ *	--------------------------------------------------
+ */
+
+$frontier-settings: () !default;
+$frontier-settings: extend( $frontier-settings-defaults, $frontier-settings );
+
+$type-settings: () !default;
+$type-settings: extend( $type-settings-defaults, $type-settings );
+
+$breakpoints: () !default;
+$breakpoints: extend( $breakpoints-defaults, $breakpoints );
+
+$easings: () !default;
+$easings: extend( $easings-defaults, $easings );

@@ -1,0 +1,11 @@
+{
+  "name": "frontier-css",
+  "version": "1.0.0",
+  "description": "Frontier CSS",
+  "main": "main.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zac Evans",
+  "license": "ISC"
+}

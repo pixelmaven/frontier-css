@@ -1,0 +1,40 @@
+
+
+//
+//	Frontier / UI / Cards
+//
+
+
+.ui-card {
+	padding: lines(3) gutters(1) 0;
+	position: relative;
+	@include clearfix;
+
+	.content {
+		position: relative; z-index: 10;
+	}
+
+	
+
+	//	Styles	 --------------------
+
+	//	Sizes	 --------------------
+
+	//	States	 --------------------
+	
+	//	Themes
+	//	--------------------------------------------------
+}
+
+
+/**
+ * 	Media Queries
+ *	--------------------------------------------------
+ */
+
+//	Breakpoint:	tablet-wide 
+//	--------------------------------------------------
+
+@include breakpoint( tablet-wide ) {
+
+}
