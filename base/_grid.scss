@@ -16,8 +16,11 @@
 	position: relative; z-index: 10;
 	@include clearfix;
 
-	&.-narrow { 
+	&.-span-narrow { 
 		width: cols( $breakpoint-columns/2 ) + $gutter-em; 
+	}
+	&.-span-full {
+		width: percentage( 1 );
 	}
 }
 
@@ -32,61 +35,73 @@
  */
 
 	.row {
-		margin-bottom: lines(3);
 		position: relative;
-		@include clearfix;
+		display: flex; flex-flow: row wrap;
 
 		//	Layout	 --------------------
 
-		&.-margin-none {
-			margin-bottom: 0;
+		&.-margin-after {
+			margin-bottom: lines(3);
 		}
 	}
 		.col {
 
 			//	Default Column	 ------------
 
-			width: percentage(1); max-width: 100%;
-			padding: 0 gutters(0.5); margin-bottom: lines(3);
-			float: left;
+			width: percentage(1/4); max-width: 100%;
+			padding: 0 gutters(0.5); // margin-bottom: lines(3);
+			flex: 1 1 0%;
 			box-sizing: border-box;
 
-			.-cols-fixed & {
-				width: cols(3);
-				box-sizing: content-box;
-			}
+			// .-cols-fixed & {
+			// 	width: cols(3);
+			// 	box-sizing: content-box;
+			// }
 
 			//	Column Sizes	 ------------
-			
-			&.-single,
-			&.-small {
-				width: percentage( 1/$breakpoint-columns );
-				.-cols-fixed & { width: cols(1); }
+		
+			&[class*="-span-"] {
+				flex: 0 0 auto;
 			}
 
-			&.-mobile-third {
+			&.-span-single {
+				width: percentage( 1/$breakpoint-columns );
+			}
+			&.-span-small {
+				width: percentage( 2/$breakpoint-columns );
+				// .-cols-fixed & { width: cols(1); }
+			}
+			
+			
+			&.-span-third {
 				width: percentage( 1/3 );
 			}
-
-			&.-mobile-half {
+			&.-span-quarter {
+				width: percentage( 1/4 );
+			}
+			&.-span-half {
 				width: percentage( 1/2 );
 			}
-
-			&.-mobile-full {
+			&.-span-twothirds {
+				width: percentage( 2/3 );
+			}
+			&.-span-wide {
+				width: percentage( 3/4 );
+			}
+			&.-span-full {
 				width: percentage( 1 );
 			}
 
 			//	Positions	 ----------------
 
-			&.-right {
-				float: right;
+			&.-pos-right {
+				margin-left: auto;
 			}
-			&.-left {
-				float: left;
+			&.-pos-left {
+				
 			}
-			&.-center {
-				margin: 0 auto;
-				float: none;
+			&.-pos-center {
+				
 			}
 			
 			//	Layout	 --------------------
@@ -100,28 +115,11 @@
 			&.-flush {
 				padding: 0 em(1) em(1) 0;
 			}
-			&.-flex {
-				display: flex;
-				flex-direction: column;
-				flex-wrap: wrap;
-
-				.col {
-					float: none;
-				}
-			}
 
 			//	Nested Styles	 ------------
 
 			.row {
 				margin-left: gutters(-0.5); margin-right: gutters(-0.5);
-
-				&.-margin-none {
-					margin-bottom: 0;
-				}
-
-				&:last-child {
-					margin-bottom: 0;
-				}
 			}
 
 			//	States	 --------------------
@@ -144,18 +142,16 @@
 
 	%container {
 		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-narrow { width: cols( $breakpoint-columns ) + $gutter-em; }
+		&.-span-narrow { width: cols( $breakpoint-columns ) + $gutter-em; }
 	}
 
 	.col {
+		width: percentage( 1 );
+		flex: 1 0 percentage( 1 );
 
 		//	Column Sizes	 ------------
-		&.-single {
+		&.-span-single {
 			width: percentage( 1/$breakpoint-columns );
-			.-cols-fixed & { width: cols(1); }
-		}
-		&.-full {
-			.-cols-fixed & { width: cols( $breakpoint-columns ); }
 		}
 		
 	}
@@ -171,7 +167,7 @@
 
 	%container {
 		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-narrow { width: cols( $breakpoint-columns ) + $gutter-em; }
+		&.-span-narrow { width: cols( $breakpoint-columns ) + $gutter-em; }
 	}
 	
 	.col {
@@ -180,12 +176,11 @@
 		width: percentage( 1 ); max-width: 100%;
 
 		//	Column Sizes	 ------------
-		&.-single {
+		&.-span-single {
 			width: percentage( 1/$breakpoint-columns );
-			.-cols-fixed & { width: cols(1); }
 		}
-		&.-full {
-			.-cols-fixed & { width: cols( $breakpoint-columns ); }
+		&.-span-full {
+
 		}
 	}
 
@@ -201,7 +196,7 @@
 
 	%container {
 		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-half { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
+		&.-span-half { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
 	}
 
 	.row {
@@ -215,41 +210,32 @@
 				width: percentage( 1/4 );
 			}
 			
-			&.-single {
+			&.-span-single {
 				width: percentage( 1/$breakpoint-columns );
-				.-cols-fixed & { width: cols(1); }
 			}
-			&.-small {
+			&.-span-small {
 				width: percentage( 1/6 );
-				.-cols-fixed & { width: cols(2); }
 			}
-			&.-third {
+			&.-span-third {
 				width: percentage( 1/3 );
-				.-cols-fixed & { width: cols(4); }
 			}
-			&.-fivetwelfths {
+			&.-span-fivetwelfths {
 				width: percentage( 5/12 );
-				.-cols-fixed & { width: cols(5); }
 			}
-			&.-half {
+			&.-span-half {
 				width: percentage( 1/2 );
-				.-cols-fixed & { width: cols(6); }
 			}
-			&.-seventwelfths {
+			&.-span-seventwelfths {
 				width: percentage( 7/12 );
-				.-cols-fixed & { width: cols(7); }
 			}
-			&.-twothirds {
+			&.-span-twothirds {
 				width: percentage( 2/3 );
-				.-cols-fixed & { width: cols(8); }
 			}
-			&.-wide {
+			&.-span-wide {
 				width: percentage( 3/4 );
-				.-cols-fixed & { width: cols(9); }
 			}
-			&.-full {
+			&.-span-full {
 				width: percentage( 1 );
-				.-cols-fixed & { width: cols( $breakpoint-columns ); }
 			}
 		}
 
@@ -265,31 +251,18 @@
 
 	%container {
 		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
+		&.-span-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
 	}
 
 	.col {
 		width: percentage( 1/4 );
 
-		&.-single {
+		&.-span-single {
 			width: percentage( 1/$breakpoint-columns );
-			.-cols-fixed & { width: cols(1); }
 		}
-		&.-full {
+		&.-span-full {
 			width: percentage( 1 );
-			.-cols-fixed & { width: cols( $breakpoint-columns ); }
 		}
-		
-	// 	&.-half-tablet {
-	// 		width: percentage( 1/2 );
-	// 	}
-	// 	&.-wide-tablet {
-	// 		width: percentage( 3/4 );
-	// 	}
-	// 	&.-full-tablet {
-	// 		width: percentage( 1 );
-	// 	}
-
 	}
 }
 
@@ -302,18 +275,16 @@
 
 	%container {
 		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
+		&.-span-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
 	}
 
 	.col {
 
-		&.-single {
+		&.-span-single {
 			width: percentage( 1/$breakpoint-columns );
-			.-cols-fixed & { width: cols(1); }
 		}
-		&.-full {
+		&.-span-full {
 			width: percentage( 1 );
-			.-cols-fixed & { width: cols( $breakpoint-columns ); }
 		}
 	}
 }
@@ -327,18 +298,16 @@
 
 	%container {
 		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
+		&.-span-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
 	}
 
 	.col {
 
-		&.-single {
+		&.-span-single {
 			width: percentage( 1/$breakpoint-columns );
-			.-cols-fixed & { width: cols(1); }
 		}
-		&.-full {
+		&.-span-full {
 			width: percentage( 1 );
-			.-cols-fixed & { width: cols( $breakpoint-columns ); }
 		}
 	}
 }
@@ -353,18 +322,16 @@
 
 	%container {
 		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
+		&.-span-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
 	}
 
 	.col {
 
-		&.-single {
+		&.-span-single {
 			width: percentage( 1/$breakpoint-columns );
-			.-cols-fixed & { width: cols(1); }
 		}
-		&.-full {
+		&.-span-full {
 			width: percentage( 1 );
-			.-cols-fixed & { width: cols( $breakpoint-columns ); }
 		}
 	}
 }

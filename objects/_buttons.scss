@@ -49,8 +49,8 @@
 	}
 
 	&.-is-disabled {
-		pointer-events: none;
-		background-color: get-color( grey );
+		pointer-events: none !important;
+		background-color: get-color( grey ) !important;
 	}
 
 	//	Themes

@@ -1,19 +1,19 @@
 
 
 //
-//	Frontier / UI / Cards
+//	Frontier / Objects / Cards
 //
 
 
-.ui-card {
+.o-card {
 	padding: lines(3) gutters(1) 0;
 	position: relative;
+	background-color: get-color( white );
 	@include clearfix;
 
 	.content {
 		position: relative; z-index: 10;
 	}
-
 	
 
 	//	Styles	 --------------------

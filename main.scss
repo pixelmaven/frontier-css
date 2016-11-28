@@ -40,18 +40,18 @@ $ENV: "dev" !default;
 //	Base	-------------------
 @import "base/normalize";
 @import "base/main";
+@import "base/grid";
 @import "base/typography";
 @import "base/images";
 @import "base/tables";
 // @import "base/code";
 
-//	UI	-----------------------
-@import "objects/typography";
-@import "objects/grid";
+//	Objects	-------------------
 @import "objects/buttons";
 @import "objects/forms";
 @import "objects/cards";
 
 //	Helpers	-------------------
+@import "helpers/alignment";
 @import "helpers/grid";
 @import "helpers/visibility";
