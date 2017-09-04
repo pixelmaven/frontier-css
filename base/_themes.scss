@@ -1,0 +1,20 @@
+
+
+//
+//	FRONTIER / Base / Themes
+//
+
+
+//	-t Themes
+
+.-t-dark {
+	color: get-color( white );
+}
+
+
+@each $color-name, $color in $theme-colors {
+	$color: get( default, $color );
+	
+	.-color-#{$color-name} { color: $color; }
+	.-bg-#{$color-name} { background-color: $color; }
+}

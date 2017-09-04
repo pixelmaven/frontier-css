@@ -5,7 +5,7 @@
 //
 
 
-$breakpoint-columns-default: 4;
+$breakpoint-columns-default: get( 'breakpoint-columns.default', $grid );
 $breakpoint-columns: $breakpoint-columns-default;
 $breakpoint-scale: 0;
 // $breakpoint-typescale: default;
@@ -19,20 +19,22 @@ $breakpoint-scale: 0;
 
 	$bp-map: get( $breakpoint, $map );
 
-	$bp-direction: #{get( direction, $bp-map )}-width;
-	$bp-width: get( width, $bp-map );
-	$bp-scale: get( scale, $bp-map );
-	$bp-typescale: get( typescale, $bp-map );	
-	$bp-cols: get( $breakpoint, get( breakpoint-columns, $grid ) );
+	@if $bp-map {
+		$bp-direction: #{get( direction, $bp-map )}-width;
+		$bp-width: get( width, $bp-map );
+		$bp-scale: get( scale, $bp-map );
+		$bp-typescale: get( typescale, $bp-map );	
+		$bp-cols: get( $breakpoint, get( breakpoint-columns, $grid ) );
 
-	// $breakpoint-typescale: $bp-typescale !global;	
+		// $breakpoint-typescale: $bp-typescale !global;	
 
-	@media ( #{$bp-direction}: em( $bp-width ) ) {
-		$breakpoint-columns: $bp-cols !global;
-		$breakpoint-scale: $bp-scale !global;
+		@media ( #{$bp-direction}: em( $bp-width ) ) {
+			$breakpoint-columns: $bp-cols !global;
+			$breakpoint-scale: $bp-scale !global;
 
-		@content;
+			@content;
 
-		$breakpoint-columns: $breakpoint-columns-default !global;
+			$breakpoint-columns: $breakpoint-columns-default !global;
+		}
 	}
 }

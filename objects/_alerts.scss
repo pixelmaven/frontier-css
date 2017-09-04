@@ -1,0 +1,26 @@
+
+
+//
+//	Frontier / Objects / Alerts
+//
+
+
+.o-alert {
+	padding: lines(1) gutters(0.5) 0;
+	position: relative;
+	background-color: get-color( grey-light );
+	@include clearfix;	
+
+	//	Styles	 --------------------
+
+	&.-style-error {
+		background-color: get-color( error );
+	}
+
+	//	Sizes	 --------------------
+
+	//	States	 --------------------
+	
+	//	Themes
+	//	--------------------------------------------------
+}

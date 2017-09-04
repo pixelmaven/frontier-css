@@ -29,6 +29,10 @@
 
 	// Sizes
 
+	&.-size-small {
+		padding: lines( 1, zeta ) gutters(0.5, zeta);
+	}
+
 	&.-size-large {
 		padding-top: lines( 3, zeta );
 		padding-bottom: lines( 3, zeta );
@@ -49,8 +53,8 @@
 	}
 
 	&.-is-disabled {
-		pointer-events: none !important;
-		background-color: get-color( grey ) !important;
+		pointer-events: none;
+		background-color: get-color( grey );
 	}
 
 	//	Themes
@@ -61,24 +65,5 @@
 		background-color: get-color( white );
 	}
 
-
-}
-
-
-
-/**
- * 	Media Queries
- *	--------------------------------------------------
- */
-
-
-//	Breakpoint:	tablet-wide 
-//	--------------------------------------------------
-
-@include breakpoint( tablet-wide ) {
-
-	.o-btn {
-
-	}
 
 }

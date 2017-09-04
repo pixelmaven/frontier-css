@@ -5,10 +5,10 @@
 //
 
 
-.-hide-mobile {
+.-hide-small {
 	display: none;
 }
-.-hide-desktop {
+.-hide-large {
 	display: inherit;
 }
 
@@ -19,19 +19,16 @@
  *	--------------------------------------------------
  */
 
-/*
- *	tablet
- *	--------------------------------------------------
- */
+/** Breakpoint:	Small ----------------------- */
 
-@include breakpoint(tablet) {
+// @include breakpoint( small ) {
 	
-	.-hide-mobile {
-		display: inherit;
-	}
-	.-hide-desktop {
-		display: none;
-	}
+// 	.-hide-small {
+// 		display: inherit;
+// 	}
+// 	.-hide-large {
+// 		display: none;
+// 	}
 
 
-}
+// }

@@ -12,6 +12,42 @@
 	margin-bottom: lines(2);
 }
 
-.-offset-bottom {
-	margin-bottom: lines(-3);
+
+.-spacer-1 {
+	margin-bottom: lines(2);
 }
+.-spacer-2 {
+	margin-bottom: lines(4);
+}
+.-spacer-3 {
+	margin-bottom: lines(6);
+}
+.-spacer-4 {
+	margin-bottom: lines(8);
+}
+.-spacer-5 {
+	margin-bottom: lines(10);
+}
+.-spacer-6 {
+	margin-bottom: lines(12);
+}
+
+
+
+.-offset-bottom {
+	margin-bottom: lines(-4);
+}
+
+/**
+ * 	Media Queries
+ *	--------------------------------------------------
+ */
+
+/** Breakpoint:	Small ----------------------- */
+
+// @include breakpoint( small ) {
+
+// 	.-spacer-4 {
+// 		margin-bottom: lines(4);
+// 	}
+// }

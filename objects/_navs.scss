@@ -1,0 +1,60 @@
+
+
+//
+//	Frontier / UI / Navs
+//
+
+
+.o-nav {
+	
+
+	ul {
+		margin: 0; padding: 0;
+		display: flex; flex-flow: column wrap;
+		list-style-type: none;
+
+		li {
+
+			&:before {
+				display: none;
+			}
+		}
+	}
+		a {
+			text-decoration: none;
+		}
+
+
+	// Formats
+
+	&.-format-horizontal {
+		width: 100%;
+
+		ul {
+			flex-flow: row wrap;
+
+			li + li {
+				margin-left: gutters(1);
+			}
+		}
+	}
+
+	&.-align-right {
+		ul {
+			justify-content: flex-end;
+		}
+	}
+
+	// Sizes
+
+	// States
+
+	//	Themes
+	//	--------------------------------------------------
+
+	.-theme-dark & {
+
+	}
+
+
+}

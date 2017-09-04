@@ -158,31 +158,3 @@ form {
 	
 	//	Themes
 	//	--------------------------------------------------
-
-
-/*
- * 	Media Queries
- *	--------------------------------------------------
- */
-
-/*
- *	Breakpoint:	tablet
- *	--------------------------------------------------
- */
-
-@include breakpoint( tablet ) {
-	
-	label, 
-	.o-field {
-		&.-small { width: 25%; }
-		&.-third { width: percentage( 1/3 ); }
-		&.-half { width: percentage( 1/2 ); }
-		&.-twothirds { width: percentage( 2/3 ); }
-		&.-wide { width: 75%; }
-		&.-full { width: 100%; }
-
-		&.-mobile-full { 
-			width: inherit;
-		}
-	}
-}

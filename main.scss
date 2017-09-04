@@ -11,7 +11,10 @@
  */
 
 //	Settings	---------------
-$ENV: "dev" !default;
+$env: 'production' !default;
+@if variable-exists(nodeEnv) {
+	$env: $nodeEnv;
+}
 
 //	Functions	---------------
 @import "functions/maps";
@@ -30,6 +33,7 @@ $ENV: "dev" !default;
 @import "functions/typesetting";
 @import "functions/units";
 @import "functions/layout";
+@import "functions/easings";
 
 //	Mixins	-------------------
 @import "mixins/breakpoints";
@@ -39,6 +43,7 @@ $ENV: "dev" !default;
 
 //	Base	-------------------
 @import "base/normalize";
+@import "base/themes";
 @import "base/main";
 @import "base/grid";
 @import "base/typography";
@@ -50,6 +55,10 @@ $ENV: "dev" !default;
 @import "objects/buttons";
 @import "objects/forms";
 @import "objects/cards";
+@import "objects/alerts";
+@import "objects/navs";
+@import "objects/tags";
+@import "objects/icons";
 
 //	Helpers	-------------------
 @import "helpers/alignment";

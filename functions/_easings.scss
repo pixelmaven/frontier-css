@@ -1,0 +1,16 @@
+
+
+//
+//	Frontier / Functions / Easings
+//
+
+
+/*
+ *	Easings
+ *	--------------------------------------------------
+ */
+
+//	Return cubic-bezier from easings map by name.
+@function get-easing( $name, $map: $easings ) {
+	@return get( $name, $map );
+}

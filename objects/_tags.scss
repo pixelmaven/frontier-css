@@ -1,0 +1,50 @@
+
+
+//
+//	Frontier / Objects / Tags
+//
+
+
+.o-tag {
+	@include font-size( 11, 2, false );
+	
+	padding: lines(0.5, 11) lines(1, 11);
+	display: inline-block;
+	color: get-color( white ); text-transform: uppercase; letter-spacing: 1px;
+	background-color: get-color( brand );
+	border-radius: 2px;
+
+	& + & {
+		margin-left: lines(1);
+	}
+	// Styles
+
+	// Formats
+
+	// Sizes
+	
+	// States
+
+	//	Themes
+	//	--------------------------------------------------
+
+	
+
+}
+
+
+
+/**
+ * 	Media Queries
+ *	--------------------------------------------------
+ */
+
+/** Breakpoint:	small ----------------------- */
+
+@include breakpoint( small ) {
+
+	.o-tag {
+
+	}
+
+}

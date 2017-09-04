@@ -11,16 +11,25 @@
  */
 
 %container {
-	width: cols( $breakpoint-columns ) + gutters(2); max-width: 100%; 
+	width: cols( $breakpoint-columns ) + gutters(1); max-width: 100%; 
 	margin-left: auto; margin-right: auto; padding: 0 gutters(0.5); box-sizing: border-box;
 	position: relative; z-index: 10;
 	@include clearfix;
 
-	&.-span-narrow { 
+	&.-span-half { 
 		width: cols( $breakpoint-columns/2 ) + $gutter-em; 
+	}
+	&.-span-narrow { 
+		width: cols( $breakpoint-columns - 2 ) + $gutter-em; 
+	}
+	&.-span-wide {
+		width: percentage( 0.8 );
 	}
 	&.-span-full {
 		width: percentage( 1 );
+	}
+	&.-span-article {
+		width: cols( 7 ) + ($gutter-em * 2); 
 	}
 }
 
@@ -40,8 +49,17 @@
 
 		//	Layout	 --------------------
 
-		&.-margin-after {
-			margin-bottom: lines(3);
+		&.-margin-none {
+			margin-bottom: 0;
+		}
+
+		&.-pos-center {
+			justify-content: center;
+		}
+
+		&.-masonry {
+			max-height: 50vh;
+			flex-flow: column wrap;
 		}
 	}
 		.col {
@@ -49,14 +67,9 @@
 			//	Default Column	 ------------
 
 			width: percentage(1/4); max-width: 100%;
-			padding: 0 gutters(0.5); // margin-bottom: lines(3);
+			padding: 0 gutters(0.5);
 			flex: 1 1 0%;
 			box-sizing: border-box;
-
-			// .-cols-fixed & {
-			// 	width: cols(3);
-			// 	box-sizing: content-box;
-			// }
 
 			//	Column Sizes	 ------------
 		
@@ -92,6 +105,17 @@
 				width: percentage( 1 );
 			}
 
+			// &.-offset-1 {
+			// 	margin-left: cols-fluid(1);
+			// }
+
+
+			&.-max-third { max-width: cols( $breakpoint-columns/3 ); }
+			&.-max-half { max-width: cols( $breakpoint-columns/2 ); }
+			&.-max-twothirds { max-width: cols( ($breakpoint-columns/3)*2 ); }
+			&.-max-wide { max-width: cols( ($breakpoint-columns/4)*3 ); }
+			&.-max-full { max-width: cols( $breakpoint-columns ); }
+
 			//	Positions	 ----------------
 
 			&.-pos-right {
@@ -101,7 +125,7 @@
 				
 			}
 			&.-pos-center {
-				
+				justify-content: center;
 			}
 			
 			//	Layout	 --------------------
@@ -128,210 +152,63 @@
 
 
 
-/*
+/**
  * 	Media Queries
  *	--------------------------------------------------
  */
 
-/*
- *	Breakpoint:	smartphone
- *	--------------------------------------------------
- */
+@each $bp, $bp-map in $breakpoints {
 
-@include breakpoint( smartphone ) {
+	@if $bp != 'default' {
+		@include breakpoint( #{$bp} ) {
 
-	%container {
-		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-span-narrow { width: cols( $breakpoint-columns ) + $gutter-em; }
-	}
+			%container {
+				width: cols( $breakpoint-columns ) + gutters(1);
+				&.-span-narrow { width: cols( $breakpoint-columns - 2 ) + $gutter-em; }
+				&.-span-half { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
+				// &.-span-article { width: cols( $breakpoint-columns - 2 ) + ($gutter-em * 2); }
+			}
 
-	.col {
-		width: percentage( 1 );
-		flex: 1 0 percentage( 1 );
-
-		//	Column Sizes	 ------------
-		&.-span-single {
-			width: percentage( 1/$breakpoint-columns );
 		}
-		
 	}
+
 }
 
+/** Breakpoint:	Large ----------------------- */
 
-/*
- *	Breakpoint:	smartphone-wide
- *	--------------------------------------------------
- */
-
-@include breakpoint( smartphone-wide ) {
-
-	%container {
-		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-span-narrow { width: cols( $breakpoint-columns ) + $gutter-em; }
-	}
+@include breakpoint( large ) {
 	
 	.col {
-
-		//	Default Column	 ------------
-		width: percentage( 1 ); max-width: 100%;
-
-		//	Column Sizes	 ------------
-		&.-span-single {
-			width: percentage( 1/$breakpoint-columns );
-		}
-		&.-span-full {
-
-		}
+		&.-offset-1 { margin-left: cols-fluid(1); }
+	// 	&.-max-third { max-width: cols( $breakpoint-columns/3 ); }
+	// 	&.-max-half { max-width: cols( $breakpoint-columns/2 ); }
 	}
-
 }
 
 
-/*
- *	Breakpoint:	tablet
- *	--------------------------------------------------
- */
+/** Breakpoint:	Small ----------------------- */
 
-@include breakpoint( tablet ) {
+@include breakpoint( small ) {
 
 	%container {
-		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-span-half { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
-	}
-
-	.row {
-		margin-bottom: lines(3);
-	}
-
-		.col {
-			width: percentage( 1/4 );
-
-			&.-mobile-half {
-				width: percentage( 1/4 );
-			}
-			
-			&.-span-single {
-				width: percentage( 1/$breakpoint-columns );
-			}
-			&.-span-small {
-				width: percentage( 1/6 );
-			}
-			&.-span-third {
-				width: percentage( 1/3 );
-			}
-			&.-span-fivetwelfths {
-				width: percentage( 5/12 );
-			}
-			&.-span-half {
-				width: percentage( 1/2 );
-			}
-			&.-span-seventwelfths {
-				width: percentage( 7/12 );
-			}
-			&.-span-twothirds {
-				width: percentage( 2/3 );
-			}
-			&.-span-wide {
-				width: percentage( 3/4 );
-			}
-			&.-span-full {
-				width: percentage( 1 );
-			}
+		&.-span-article {
+			width: cols( $breakpoint-columns ) + gutters(1); 
 		}
 
-}
+		&.-span-max-onsmall {
+			width: 100%;
+			padding: 0;
 
-
-/*
- *	Breakpoint:	tablet-wide
- *	--------------------------------------------------
- */
-
-@include breakpoint( tablet-wide ) {
-
-	%container {
-		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-span-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
+			.col {
+				padding: 0;
+			}
+		}
 	}
 
 	.col {
-		width: percentage( 1/4 );
+		// width: percentage(1);
+		// flex: 1 1 100%;
 
-		&.-span-single {
-			width: percentage( 1/$breakpoint-columns );
-		}
-		&.-span-full {
-			width: percentage( 1 );
-		}
-	}
-}
-
-/*
- *	Breakpoint:	desktop
- *	--------------------------------------------------
- */
-
-@include breakpoint( desktop ) {
-
-	%container {
-		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-span-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
-	}
-
-	.col {
-
-		&.-span-single {
-			width: percentage( 1/$breakpoint-columns );
-		}
-		&.-span-full {
-			width: percentage( 1 );
-		}
-	}
-}
-
-/*
- *	Breakpoint:	med-desktop
- *	--------------------------------------------------
- */
-
-@include breakpoint( med-desktop ) {
-
-	%container {
-		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-span-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
-	}
-
-	.col {
-
-		&.-span-single {
-			width: percentage( 1/$breakpoint-columns );
-		}
-		&.-span-full {
-			width: percentage( 1 );
-		}
-	}
-}
-
-
-/*
- *	Breakpoint:	large-desktop
- *	--------------------------------------------------
- */
-
-@include breakpoint( large-desktop ) {
-
-	%container {
-		width: cols( $breakpoint-columns ) + gutters(2);
-		&.-span-narrow { width: cols( $breakpoint-columns/2 ) + $gutter-em; }
-	}
-
-	.col {
-
-		&.-span-single {
-			width: percentage( 1/$breakpoint-columns );
-		}
-		&.-span-full {
-			width: percentage( 1 );
-		}
+		&.-offset-1 { margin-left: 0 }
 	}
 }

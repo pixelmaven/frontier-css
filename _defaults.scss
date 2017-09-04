@@ -5,15 +5,12 @@
 //
 
 
-$frontier-settings-defaults: (
-	
-);
-
 /*
  *	Colours
  *	--------------------------------------------------
  */
 
+$colors: () !default;
 $colors-defaults: (
 	//	Base Palette
 	white:					#fff,
@@ -21,7 +18,9 @@ $colors-defaults: (
 		grey-light:			#f4f4f4,
 		grey-med:			#666,
 		grey-dark:			#333,
-	black:					#000,				
+	black:					#000,
+	error: 					red,
+	success: 				green,	
 	
 	// 	Brand Palette
 	base: 					#33404d,
@@ -29,7 +28,8 @@ $colors-defaults: (
 		brand-dark: 		#c9510c,
 );
 
-$colors: () !default;
+// TODO: Add colour settings - Error: red
+
 $colors: extend( $colors-defaults, $colors );
 
 //	Colour Vars
@@ -45,9 +45,15 @@ $button-color:			$color-primary !default;
 $button-color-text:		$color-secondary !default;
 $background-color:		transparent !default;
 
-$theme-colors: (
-	brand: ( default: get( brand, $colors ), dark: get( brand-dark, $colors ) )
+//	Theme Colours
+$theme-colors: () !default;
+$theme-colors-defaults: (
+	grey: 		( default: get( grey, $colors )),
+	grey-med: 	( default: get( grey-med, $colors )),
+	brand: 		( default: get( brand, $colors ), dark: get( brand-dark, $colors ))
 );
+
+$theme-colors: extend( $theme-colors-defaults, $theme-colors );
 
 
 /*
@@ -55,6 +61,7 @@ $theme-colors: (
  *	--------------------------------------------------
  */
 
+$type-settings: () !default;
 $type-settings-defaults: (
 	line-height:			8,	// px
 	segment-size:			8,	// lines
@@ -63,6 +70,7 @@ $type-settings-defaults: (
 	field-label-size: 		eta
 );
 
+$type-scale: () !default;
 $type-scale-defaults: (
 	/*	title: 	( size (px), lines(baseline), margins(baseline), cap-height(ratio), map to tag ) */
 	default: 	( px: 16, lines: 3, margin: 2, cap: 0.75, map-to: h5 ),
@@ -72,14 +80,15 @@ $type-scale-defaults: (
 	gamma: 		( px: 36, lines: 6, margin: 2, cap: 0.75, map-to: h3 ),
 	delta: 		( px: 24, lines: 4, margin: 3, cap: 0.75, map-to: h4 ),
 	epsilon: 	( px: 18, lines: 3, margin: 3, cap: 0.75 ),
-	
+
 	zeta: 		( px: 14, lines: 3, margin: 3, cap: 0.6 ),
 	eta: 		( px: 12, lines: 2, map-to: h6 ),
 	theta: 		( px: 11, lines: 2 ),
-	india: 		( px: 9, lines: 1.5 )
+	iota: 		( px: 9, lines: 1.5 ),
+	kappa: 		( px: 8, lines: 1.5, margin: 2, cap: 0.6 )
 );
 
-$type-scale: () !default;
+$type-settings: extend( $type-settings-defaults, $type-settings );
 $type-scale: extend( $type-scale-defaults, $type-scale );
 
 //	Font Vars
@@ -97,25 +106,18 @@ $button-font:			$font-secondary !default;
  *	--------------------------------------------------
  */
 
+$grid: () !default;
 $grid-defaults: (
 	column-width:			72, /* The column-width of your grid in pixels */
 	gutter-width:			32, /* The gutter-width of your grid in pixels */
 
 	breakpoint-columns: (
-		default:			4,
-
-		smartphone: 		4,
-		smartphone-wide:	4,
-		tablet:				8,
-		tablet-wide: 		10,
-
-		desktop: 			12,
-		med-desktop: 		12,
-		large-desktop: 		12
+		default:	8,
+		small: 		6,
+		large: 		12
 	)
 );
 
-$grid: () !default;
 $grid: extend( $grid-defaults, $grid );
 
 //	Font Vars
@@ -128,19 +130,20 @@ $gutter-em: get( gutter-width, $grid ) / get( 'default.px', $type-scale ) * 1em;
  *	--------------------------------------------------
  */
 
+$breakpoints-extend: true !default;
+$breakpoints: () !default;
 $breakpoints-defaults: (
-/*	title: 				(mq pixels columns) */
-	default:			( direction: min, width: 320, scale: 0 ),
-
-	smartphone: 		( direction: min, width: 480, scale: 0 ),
-	smartphone-wide:	( direction: min, width: 640, scale: 0 ),
-	tablet:				( direction: min, width: 768, scale: 0 ),
-	tablet-wide: 		( direction: min, width: 1024, scale: 0 ),
-
-	desktop: 			( direction: min, width: 1366, scale: 0 ),
-	med-desktop: 		( direction: min, width: 1680, scale: 0 ),
-	large-desktop: 		( direction: min, width: 1920, scale: 0 )
+/*	title: 		( direction: mq, width: pixel, scale: 16+/- ) */
+	default:	( direction: max, width: 1280, scale: 0 ),
+	small: 		( direction: max, width: 768, scale: 0 ),
+	large: 		( direction: min, width: 1281, scale: 0 ),
 );
+
+// 	Probably shouldn't extend default breakpoints if replaced, 
+//	disables the ability to remove bp options.
+@if ( $breakpoints-extend ) {
+	$breakpoints: extend( $breakpoints-defaults, $breakpoints );
+}
 
 
 /*
@@ -148,6 +151,7 @@ $breakpoints-defaults: (
  *	--------------------------------------------------
  */
 
+$easings: () !default;
 $easings-defaults: (
 	linear:				cubic-bezier(0.250, 0.250, 0.750, 0.750),
 	
@@ -181,29 +185,7 @@ $easings-defaults: (
 	
 	circ-in:			cubic-bezier(0.600, 0.040, 0.980, 0.335),
 	circ-out:			cubic-bezier(0.075, 0.820, 0.165, 1.000),
-	circ-in-out:		cubic-bezier(0.785, 0.135, 0.150, 0.860),
+	circ-in-out:		cubic-bezier(0.785, 0.135, 0.150, 0.860)
 );
 
-
-/*
- *	Animations
- *	--------------------------------------------------
- */
-
-
-/*
- *	Settings Defaults
- *	--------------------------------------------------
- */
-
-$frontier-settings: () !default;
-$frontier-settings: extend( $frontier-settings-defaults, $frontier-settings );
-
-$type-settings: () !default;
-$type-settings: extend( $type-settings-defaults, $type-settings );
-
-$breakpoints: () !default;
-$breakpoints: extend( $breakpoints-defaults, $breakpoints );
-
-$easings: () !default;
 $easings: extend( $easings-defaults, $easings );

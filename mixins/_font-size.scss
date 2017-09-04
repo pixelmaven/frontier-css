@@ -37,7 +37,7 @@ $show-guides: false;
 	$offset-adjust: 0;
 
 	font-size: em( $font-size );
-	max-width: cols( 8, $font-size );
+	// max-width: cols( 8, $font-size );
 	line-height: $lh-em-total * 1em;
 	position: relative;
 
@@ -68,6 +68,17 @@ $show-guides: false;
 				background-color: rgba(red, 0.2);
 			}
 		}
+
+		&.-margin-1 {
+			padding-bottom: (( $lh-px * 2 ) - $offset-px - $offset-adjust ) / $font-size * 1em;
+		}
+		&.-margin-2 {
+			padding-bottom: (( $lh-px * 3 ) - $offset-px - $offset-adjust ) / $font-size * 1em;
+		}
+		&.-margin-3 {
+			padding-bottom: (( $lh-px * 4 ) - $offset-px - $offset-adjust ) / $font-size * 1em;
+		}
+
 
 		&.-margin-small {
 			padding-bottom: (( $lh-px * ($margin-lines - 1)) - $offset-px - $offset-adjust ) / $font-size * 1em;

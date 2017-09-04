@@ -16,7 +16,6 @@ body {
 }
 
 @each $scale, $data in $type-scale {
-	
 	$px: 		if( map-has-key( $data, 'px' ), get( px, $data ), 16 );
 	$lines: 	if( map-has-key( $data, 'lines' ), get( lines, $data ), 1 );
 	$cap-size: 	if( map-has-key( $data, 'cap' ), get( cap, $data ), 1 );
@@ -76,6 +75,24 @@ p {
 	}
 }
 
+blockquote {
+	margin: lines(3) cols(1);
+	position: relative;
+
+	&:before {
+		content: '';
+		width: em(6); height: 100%;
+		position: absolute; top: 0; left: lines(-4);
+		display: block;
+		background-color: #ddd;
+	}
+
+	p {
+		margin: 0; padding: 0;
+		font-style: italic;
+	}
+}
+
 
 /*
  *	Anchors
@@ -84,18 +101,21 @@ p {
 
 a {
 	color: $link-color;
+	display: inline-block;
+	position: relative;
+	text-decoration: none;
 
 	&.-is-hover,
 	&:hover,
 	&:focus,
 	&:active {
 		color: $link-color-hover;
-		text-decoration: underline;
+		text-decoration: none;
 	}
 	
 	&.-is-visited {
 	// &:visited {
-		color: get-color( brand-purple );
+		color: $link-color-hover;
 	}
 }
 
@@ -105,23 +125,30 @@ a {
  */
 
 %unstyled {
+	max-width: 100%;
 	margin: 0; padding: 0;
 	list-style: none;
+
+	li {
+		&:before {
+			content: '';
+		}
+	}
 }
 
-ul {
+ul, ol {
 	max-width: cols(8);
 	margin: 0 0 lines(2); padding-left: gutters(1.25); box-sizing: border-box;
-	list-style-type: none;
 
-	&.unstyled {
+	&.-unstyled {
 		@extend %unstyled;
+
 	}
 
 	li {
 		font-family: $font-primary; font-weight: 100;
-		@include font-size( 16, 3, true, 1, 0.8 );
-
+		@include font-size( default, 3, true, 0 );
+		
 		&:before {
 			content: "•";
 			color: get-color( brand );
@@ -170,6 +197,9 @@ ul {
 .-caps {
 	text-transform: uppercase;
 }
+.-lower {
+	text-transform: lowercase;
+}
 .-border {
 	border-bottom: 2px solid currentColor;
 }
@@ -192,9 +222,9 @@ ul {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-	.-align-center & {
-		margin-left: auto; margin-right: auto;
-	}
+	// .-align-center & {
+	// 	margin-left: auto; margin-right: auto;
+	// }
 }
 
 
@@ -228,13 +258,4 @@ h1, h2, h3, h4, h5, h6, p {
 		}
 	}
 
-}
-/*
- *	Breakpoint:	Default
- *	--------------------------------------------------
- */
-
-@include breakpoint(default) {
-
-	
 }

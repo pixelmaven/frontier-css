@@ -55,7 +55,6 @@ a {
 	}
 }
 
-
 /*
  *	Typography
  *	--------------------------------------------------
@@ -146,13 +145,17 @@ button, input, optgroup, select, textarea {
 }
 	button {
 		overflow: visible;
+		-webkit-appearance: none;
+		border: none; outline: none;
+		background-color: transparent;
+		cursor: pointer;
 	}
 
 	button, select {
 		text-transform: none;
 	}
 
-	button, html input[type="button"],
+	html input[type="button"],
 	input[type="reset"], input[type="submit"] {
 		-webkit-appearance: button;
 		cursor: pointer;

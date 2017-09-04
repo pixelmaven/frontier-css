@@ -11,13 +11,18 @@
  */
 
 @function cols( $columns: 1, $context: default ) {
-	$col-w: get( column-width, $grid );
-	$gutter-w: get( gutter-width, $grid );
-
-	@if type-of( $context ) == string {
-		$context: get-font-size( $context );
+	@if type-of( $columns ) == number {
+		$col-w: get( column-width, $grid );
+		$gutter-w: get( gutter-width, $grid );
+		
+		@if type-of( $context ) == string {
+			$context: get-font-size( $context );
+		}
+		
+		@return ( $columns * ( $col-w + $gutter-w )/* - $gutter-w */) / $context * 1em;
+	} @else {
+		@error ('`$columns` of `#{$columns}` is not a number.');
 	}
-	@return ( $columns * ( $col-w + $gutter-w ) - $gutter-w ) / $context * 1em;
 }
 
 @function cols-fluid( $columns: 1, $bp-cols: $breakpoint-columns ) {
