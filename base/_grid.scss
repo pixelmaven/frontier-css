@@ -17,10 +17,10 @@
 	@include clearfix;
 
 	&.-span-half { 
-		width: cols( $breakpoint-columns/2 ) + $gutter-em; 
+		width: cols( $breakpoint-columns/2 ) + gutters(1); 
 	}
 	&.-span-narrow { 
-		width: cols( $breakpoint-columns - 2 ) + $gutter-em; 
+		width: cols( $breakpoint-columns - 2 ) + gutters(1); 
 	}
 	&.-span-wide {
 		width: percentage( 0.8 );
@@ -29,7 +29,7 @@
 		width: percentage( 1 );
 	}
 	&.-span-article {
-		width: cols( 7 ) + ($gutter-em * 2); 
+		width: cols( 7 ) + gutters(2); 
 	}
 }
 
@@ -191,6 +191,7 @@
 @include breakpoint( small ) {
 
 	%container {
+		
 		&.-span-article {
 			width: cols( $breakpoint-columns ) + gutters(1); 
 		}

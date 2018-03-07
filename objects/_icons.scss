@@ -43,14 +43,21 @@
 		vertical-align: middle;
 	}
 
+	&.-size-2,
 	&.-size-small {
 		width: lines(2); height: lines(2);
 	}
 
+	&.-size-3 {
+		width: lines(3); height: lines(3);
+	}
+	
+	&.-size-4,
 	&.-size-medium {
 		width: lines(4); height: lines(4);
 	}
-
+	
+	&.-size-5,
 	&.-size-large {
 		width: segments(1); height: segments(1);
 	}
