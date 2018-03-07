@@ -13,10 +13,18 @@
 }
 
 
+//	Spacer Lines
+.-sl1 { margin-bottom: lines(1); }
+.-sl2 { margin-bottom: lines(2); }
+.-sl3 { margin-bottom: lines(3); }
+.-sl4 { margin-bottom: lines(4); }
+.-sl5 { margin-bottom: lines(5); }
+.-sl6 { margin-bottom: lines(6); }
 
-.-s1 {
-	margin-bottom: lines(1);
-}
+//	Spacer Segments
+.-ss1 { margin-bottom: segments(1); }
+.-ss2 { margin-bottom: segments(2); }
+.-ss3 { margin-bottom: segments(3); }
 
 .-spacer-1 {
 	margin-bottom: lines(2);
@@ -50,9 +58,8 @@
 
 /** Breakpoint:	Small ----------------------- */
 
-// @include breakpoint( small ) {
+@include breakpoint( small ) {
 
-// 	.-spacer-4 {
-// 		margin-bottom: lines(4);
-// 	}
-// }
+	.-sl2 { margin-bottom: lines(1); }
+	.-sl3 { margin-bottom: lines(1.5); }
+}
